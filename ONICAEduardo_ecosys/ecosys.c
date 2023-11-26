@@ -5,7 +5,7 @@
 #include "ecosys.h"
 #include <string.h>
 
-/* PARTIE 1*/
+
 
 float p_changement_direction=0.5;
 float p_reproduce_proie=0.3;
@@ -13,7 +13,7 @@ float p_reproduce_predateur=0.4;
 int temps_repousse_herbe=-15;
 
 
-/* Fourni: Part 1, exercice 4, question 2 */
+
 Animal *creer_animal(int x, int y, float energie) {
   Animal *na = (Animal *)malloc(sizeof(Animal));
   assert(na);
@@ -27,7 +27,7 @@ Animal *creer_animal(int x, int y, float energie) {
 }
 
 
-/* Fourni: Part 1, exercice 4, question 3 */
+
 Animal *ajouter_en_tete_animal(Animal *liste, Animal *animal) {
   assert(animal);
   assert(!animal->suivant);
@@ -35,7 +35,6 @@ Animal *ajouter_en_tete_animal(Animal *liste, Animal *animal) {
   return animal;
 }
 
-/* REALISE Part 1, exercice 6, question 2 */
 void ajouter_animal(int x, int y,  float energie, Animal **liste_animal) {
   assert(x < SIZE_X);
   assert(y < SIZE_Y);
@@ -47,7 +46,7 @@ void ajouter_animal(int x, int y,  float energie, Animal **liste_animal) {
 
 
 
-/* FAIT Part 1, exercice 5, question 5 */
+
 void enlever_animal(Animal **liste, Animal *animal) {
 	Animal *listept = *liste;
 	Animal *tmp = NULL;
@@ -70,7 +69,7 @@ void enlever_animal(Animal **liste, Animal *animal) {
 	}
 }
 
-/* FAIT. Part 1, exercice 6, question 7 */
+
 Animal* liberer_liste_animaux(Animal *liste) {
 	Animal *tmp1 = liste;
 	Animal *tmp2 = NULL;
@@ -83,13 +82,12 @@ Animal* liberer_liste_animaux(Animal *liste) {
 	
 	return NULL;
 }
-/* Fourni: part 1, exercice 4, question 4 */
+
 unsigned int compte_animal_rec(Animal *la) {
   if (!la) return 0;
   return 1 + compte_animal_rec(la->suivant);
 }
 
-/* Fourni: part 1, exercice 4, question 4 */
 unsigned int compte_animal_it(Animal *la) {
   int cpt=0;
   while (la) {
@@ -101,7 +99,6 @@ unsigned int compte_animal_it(Animal *la) {
 
 
 
-/* Part 1. Exercice 5, question 1, ATTENTION, ce code est susceptible de contenir des erreurs... */
 void afficher_ecosys(Animal *liste_proie, Animal *liste_predateur) {
   unsigned int i, j;
   char ecosys[SIZE_X][SIZE_Y];
@@ -162,8 +159,6 @@ void clear_screen() {
   printf("\x1b[2J\x1b[1;1H");  /* code ANSI X3.4 pour effacer l'ecran */
 }
 
-/* PARTIE 2*/
-/*fonction ecrire ecosys du TD*/
 void ecrire_ecosys(const char *nom_fichier, Animal *liste_proie, Animal *liste_predateur){
 	FILE *f = fopen(nom_fichier, "w");
 	if (f == NULL){
@@ -188,8 +183,7 @@ void ecrire_ecosys(const char *nom_fichier, Animal *liste_proie, Animal *liste_p
 	fprintf(f, "</predateur>\n");
 	
 	fclose(f);
-}
-/*fonction lire ecosys du TD*/
+
 void lire_ecosys(const char *nom_fichier, Animal **liste_predateur, Animal **liste_proie){
 	FILE *f = fopen(nom_fichier, "r");
 	if (f == NULL){
@@ -230,7 +224,7 @@ void lire_ecosys(const char *nom_fichier, Animal **liste_predateur, Animal **lis
 	fclose(f);
 }
 
-/* Part 2. Exercice 4, question 1 */
+
 void bouger_animaux(Animal *la) {
   Animal *a = la;
   
@@ -246,7 +240,7 @@ void bouger_animaux(Animal *la) {
 	}
 }
 
-/* Part 2. Exercice 4, question 3 */
+
 void reproduce(Animal **la, float p_reproduce) {
   Animal *a = la ? *la : NULL;
 
@@ -261,7 +255,7 @@ void reproduce(Animal **la, float p_reproduce) {
 }
 
 
-/* Part 2. Exercice 6, question 1 */
+
 void rafraichir_proies(Animal **liste_proie, int monde[SIZE_X][SIZE_Y]) {
   bouger_animaux(*liste_proie);
   Animal *temp;
@@ -304,7 +298,6 @@ Animal *animal_en_XY(Animal *l, int x, int y) {
   return NULL;
 } 
 
-/* Part 2. Exercice 7, question 2 */
 void rafraichir_predateurs(Animal **liste_predateur, Animal **liste_proie) {
   bouger_animaux(*liste_predateur);
   Animal *temp = liste_predateur ? *liste_predateur : NULL;
@@ -329,7 +322,6 @@ void rafraichir_predateurs(Animal **liste_predateur, Animal **liste_proie) {
   reproduce(liste_predateur, p_reproduce_predateur);
 }
 
-/* Part 2. Exercice 5, question 2 */
 void rafraichir_monde(int monde[SIZE_X][SIZE_Y]){
   for(int i = 0; i < SIZE_X; i++)
     for(int j = 0; j < SIZE_Y; j++)
